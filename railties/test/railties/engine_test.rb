@@ -1087,7 +1087,7 @@ YAML
       assert_equal [:bar, :baz], Bukkits::Engine.helpers.public_instance_methods.sort
     end
 
-    test "setting priority for engines with config.railties_order" do
+    test "AAAAA setting priority for engines with config.railties_order" do
       @blog = engine "blog" do |plugin|
         plugin.write "lib/blog.rb", <<-RUBY
           module Blog

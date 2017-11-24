@@ -553,13 +553,15 @@ module Rails
 
     def railties_initializers(current) #:nodoc:
       initializers = []
-      ordered_railties.reverse.flatten.each do |r|
+      ordered_railties.flatten.each do |r|
         if r == self
           initializers += current
         else
           initializers += r.initializers
         end
       end
+      # raise initializers.first.context_class.inspect
+      puts initializers.map{|i| [i.context_class, i.name].join("\t")}.join("\n")
       initializers
     end
 

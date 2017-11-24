@@ -578,7 +578,7 @@ module Rails
       routing_paths = paths["config/routes.rb"].existent
 
       if routes? || routing_paths.any?
-        app.routes_reloader.paths.unshift(*routing_paths)
+        app.routes_reloader.paths.push(*routing_paths)
         app.routes_reloader.route_sets << routes
       end
     end
@@ -592,8 +592,8 @@ module Rails
     initializer :add_view_paths do
       views = paths["app/views"].existent
       unless views.empty?
-        ActiveSupport.on_load(:action_controller) { prepend_view_path(views) if respond_to?(:prepend_view_path) }
-        ActiveSupport.on_load(:action_mailer) { prepend_view_path(views) }
+        ActiveSupport.on_load(:action_controller) { append_view_path(views) if respond_to?(:append_view_path) }
+        ActiveSupport.on_load(:action_mailer) { append_view_path(views) }
       end
     end
 
